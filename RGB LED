@@ -1,0 +1,48 @@
+Common Cathode RGB LED:
+Common Cathode Pin: Connect the cathode (common ground) pin of the RGB LED to the GND pin on the Arduino.
+Red Pin: Connect the red pin of the RGB LED to digital pin 9 on the Arduino through a 220-ohm resistor.
+Green Pin: Connect the green pin of the RGB LED to digital pin 10 on the Arduino through a 220-ohm resistor.
+Blue Pin: Connect the blue pin of the RGB LED to digital pin 11 on the Arduino through a 220-ohm resistor.
+
+
+const int redPin = 9;
+const int greenPin = 10;
+const int bluePin = 11;
+
+void setColor(int redValue, int greenValue, int blueValue) {
+  analogWrite(redPin, redValue);
+  analogWrite(greenPin, greenValue);
+  analogWrite(bluePin, blueValue);
+}
+
+void setup() {
+  pinMode(redPin, OUTPUT);
+  pinMode(greenPin, OUTPUT);
+  pinMode(bluePin, OUTPUT);
+}
+
+void loop() {
+  setColor(255, 0, 0); // Full red, no green, no blue
+  delay(1000);
+
+  setColor(0, 255, 0); // Full green, no red, no blue
+  delay(1000);
+
+  setColor(0, 0, 255); // Full blue, no red, no green
+  delay(1000);
+
+  setColor(255, 255, 0); // Full red, full green, no blue
+  delay(1000);
+
+  setColor(0, 255, 255); // No red, full green, full blue
+  delay(1000);
+
+  setColor(255, 0, 255); // Full red, no green, full blue
+  delay(1000);
+  
+  setColor(255, 255, 255); // Full red, full green, full blue
+  delay(1000);
+
+  setColor(0, 0, 0); // No red, no green, no blue
+  delay(1000);
+}
