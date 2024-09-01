@@ -1,0 +1,55 @@
+Circuit Setup:
+LCD Pins to Arduino Connections:
+VSS (Pin 1): Connect to GND.
+VDD (Pin 2): Connect to 5V.
+V0 (Pin 3): Connect to the middle pin of a 10k ohm potentiometer (used for contrast adjustment). Connect the other two potentiometer pins to 5V and GND.
+RS (Pin 4): Connect to digital pin 12 on the Arduino.
+RW (Pin 5): Connect to GND (set to write mode).
+E (Pin 6): Connect to digital pin 11 on the Arduino.
+D4 (Pin 11): Connect to digital pin 5 on the Arduino.
+D5 (Pin 12): Connect to digital pin 4 on the Arduino.
+D6 (Pin 13): Connect to digital pin 3 on the Arduino.
+D7 (Pin 14): Connect to digital pin 2 on the Arduino.
+A (Pin 15): Connect to 5V (backlight anode).
+K (Pin 16): Connect to GND (backlight cathode).
+
+#include <LiquidCrystal.h>
+
+// Initialize the library with the numbers of the interface pins
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+
+// Variables to store time
+int seconds = 0;
+int minutes = 0;
+
+void setup() {
+  lcd.begin(16, 2);
+  // Print initial message
+  lcd.print("Timer: 00:00");
+}
+
+void loop() {
+  // Increment the timer every second
+  delay(1000); // Wait for 1 second
+  seconds++; // Increment seconds
+
+  // If seconds reach 60, increment minutes and reset seconds
+  if (seconds == 60) {
+    minutes++;
+    seconds = 0;
+  }
+
+  lcd.setCursor(0, 1); // Set the cursor to the beginning of the second line
+  lcd.print("Time: ");
+  
+  if (minutes < 10) {
+    lcd.print("0"); // Leading zero for single-digit minutes
+  }
+  lcd.print(minutes);
+  lcd.print(":");
+
+  if (seconds < 10) {
+    lcd.print("0"); // Leading zero for single-digit seconds
+  }
+  lcd.print(seconds);
+}
