@@ -1,0 +1,52 @@
+Circuit Setup:
+LCD Pins to Arduino Connections:
+VSS (Pin 1): Connect to GND.
+VDD (Pin 2): Connect to 5V.
+V0 (Pin 3): Connect to the middle pin of a 10k ohm potentiometer (used for contrast adjustment). Connect the other two potentiometer pins to 5V and GND.
+RS (Pin 4): Connect to digital pin 12 on the Arduino.
+RW (Pin 5): Connect to GND (set to write mode).
+E (Pin 6): Connect to digital pin 11 on the Arduino.
+D4 (Pin 11): Connect to digital pin 5 on the Arduino.
+D5 (Pin 12): Connect to digital pin 4 on the Arduino.
+D6 (Pin 13): Connect to digital pin 3 on the Arduino.
+D7 (Pin 14): Connect to digital pin 2 on the Arduino.
+A (Pin 15): Connect to 5V (backlight anode).#include <LiquidCrystal.h>
+
+
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+
+void setup() {
+  lcd.begin(16, 2);
+  
+  lcd.print("Hello, World!");
+}
+
+void loop() {
+  lcd.setCursor(0, 1);
+
+  lcd.print("Arduino LCD");
+  delay(1000); // Wait for 1 second
+
+  lcd.clear();
+  delay(500); // Wait for half a second
+
+  lcd.setCursor(0, 0);
+  lcd.print("Display Test");
+  lcd.setCursor(0, 1);
+  lcd.print("Line 2 Text!");
+  delay(2000); // Wait for 2 seconds
+
+  for (int positionCounter = 0; positionCounter < 16; positionCounter++) {
+    // Scroll the display to the left
+    lcd.scrollDisplayLeft();
+    delay(300); // Wait for 300 milliseconds
+  }
+
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("End of Demo");
+  delay(2000); // Wait for 2 seconds
+}
+
+K (Pin 16): Connect to GND (backlight cathode).
+
